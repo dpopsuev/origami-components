@@ -7,8 +7,8 @@ func CaseIDsFromEnvelope(env *Envelope) []int {
 		return nil
 	}
 	ids := make([]int, 0, len(env.FailureList))
-	for _, f := range env.FailureList {
-		ids = append(ids, f.ID)
+	for i := range env.FailureList {
+		ids = append(ids, env.FailureList[i].ID)
 	}
 	return ids
 }

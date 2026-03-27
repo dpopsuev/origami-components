@@ -78,16 +78,19 @@ func (i *Issue) StatusName() string {
 	return i.Fields.Status.Name
 }
 
+// statusCategoryDone is the Jira status category key for resolved issues.
+const statusCategoryDone = "done"
+
 // IsDone returns true if the issue's status category is "done".
 func (i *Issue) IsDone() bool {
-	return i.Fields.Status.StatusCategory.Key == "done"
+	return i.Fields.Status.StatusCategory.Key == statusCategoryDone
 }
 
 // GetIssue fetches a single issue by key (e.g. "OCPBUGS-70233").
 func (c *Client) GetIssue(ctx context.Context, key string) (*Issue, error) {
 	url := fmt.Sprintf("%s/rest/api/2/issue/%s?fields=summary,status,resolution,fixVersions", c.baseURL, key)
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
 	if err != nil {
 		return nil, fmt.Errorf("jira: create request: %w", err)
 	}

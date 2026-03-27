@@ -30,14 +30,11 @@ func (p *ProjectScope) FetchEnvelope(ctx context.Context, launchID int) (*Envelo
 	}
 
 	for _, attr := range launch.Attributes {
-		env.LaunchAttributes = append(env.LaunchAttributes, Attribute{
-			Key:    attr.Key,
-			Value:  attr.Value,
-			System: attr.System,
-		})
+		env.LaunchAttributes = append(env.LaunchAttributes, Attribute(attr))
 	}
 
-	for _, it := range items {
+	for i := range items {
+		it := items[i]
 		path := it.Path
 		if path == "" {
 			path = strconv.Itoa(it.ID)

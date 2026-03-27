@@ -9,7 +9,7 @@ import (
 )
 
 // ListPRs returns pull requests for a repo, optionally filtered by state and base branch.
-func (c *Client) ListPRs(ctx context.Context, owner, repo string, state, base string, perPage int) ([]PullRequest, error) {
+func (c *Client) ListPRs(ctx context.Context, owner, repo, state, base string, perPage int) ([]PullRequest, error) {
 	if perPage <= 0 {
 		perPage = 30
 	}
@@ -28,7 +28,7 @@ func (c *Client) ListPRs(ctx context.Context, owner, repo string, state, base st
 
 	reqURL := fmt.Sprintf("https://api.github.com/repos/%s/%s/pulls?%s", owner, repo, params.Encode())
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, reqURL, nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, reqURL, http.NoBody)
 	if err != nil {
 		return nil, fmt.Errorf("github list PRs: create request: %w", err)
 	}

@@ -41,7 +41,7 @@ func Push(artifactPath string, store PushStore, jiraTicketID, jiraLink string) e
 	if err := json.Unmarshal(data, &a); err != nil {
 		return err
 	}
-	return store.RecordPushed(PushedRecord{
+	return store.RecordPushed(&PushedRecord{
 		RunID:        a.RunID,
 		CaseIDs:      a.CaseIDs,
 		DefectType:   a.DefectType,

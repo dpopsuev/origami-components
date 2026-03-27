@@ -38,8 +38,9 @@ func (f *RPRunDiscoverer) DiscoverRuns(project string, since time.Time) ([]rcaty
 		return nil, err
 	}
 
-	var runs []rcatype.RunInfo
-	for _, l := range paged.Content {
+	runs := make([]rcatype.RunInfo, 0, len(paged.Content))
+	for i := range paged.Content {
+		l := &paged.Content[i]
 		var startTime time.Time
 		if l.StartTime != nil {
 			startTime = l.StartTime.Time()
@@ -76,8 +77,9 @@ func (f *RPRunDiscoverer) FetchFailures(runID int) ([]rcatype.FailureInfo, error
 		return nil, err
 	}
 
-	var failures []rcatype.FailureInfo
-	for _, item := range items {
+	failures := make([]rcatype.FailureInfo, 0, len(items))
+	for i := range items {
+		item := &items[i]
 		fi := rcatype.FailureInfo{
 			RunID:    runID,
 			ItemID:   item.ID,

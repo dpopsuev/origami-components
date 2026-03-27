@@ -75,7 +75,7 @@ func ParsePRRef(ref string) (owner, repo string, number int, err error) {
 func (c *Client) GetPR(ctx context.Context, owner, repo string, number int) (*PullRequest, error) {
 	url := fmt.Sprintf("https://api.github.com/repos/%s/%s/pulls/%d", owner, repo, number)
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, url, http.NoBody)
 	if err != nil {
 		return nil, fmt.Errorf("github: create request: %w", err)
 	}

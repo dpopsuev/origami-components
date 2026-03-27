@@ -50,5 +50,5 @@ func AnalyzeWithCatalog(src EnvelopeSource, launchID int, artifactPath string, c
 	if err != nil {
 		return err
 	}
-	return os.WriteFile(artifactPath, data, 0644)
+	return os.WriteFile(artifactPath, data, 0o644)
 }

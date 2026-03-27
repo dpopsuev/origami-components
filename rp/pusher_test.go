@@ -40,7 +40,7 @@ func TestPusher_Push_Success(t *testing.T) {
 	data, _ := json.Marshal(artifact)
 	tmpDir := t.TempDir()
 	artifactPath := filepath.Join(tmpDir, "artifact.json")
-	if err := os.WriteFile(artifactPath, data, 0644); err != nil {
+	if err := os.WriteFile(artifactPath, data, 0o644); err != nil {
 		t.Fatal(err)
 	}
 
@@ -115,7 +115,7 @@ func TestPusher_Push_AttributionWithoutSubmitter(t *testing.T) {
 	data, _ := json.Marshal(artifact)
 	tmpDir := t.TempDir()
 	artifactPath := filepath.Join(tmpDir, "artifact.json")
-	os.WriteFile(artifactPath, data, 0644)
+	os.WriteFile(artifactPath, data, 0o644)
 
 	store := NewMemPushStore()
 	if err := pusher.Push(artifactPath, store, "", ""); err != nil {
@@ -159,7 +159,7 @@ func TestPusher_Push_InvalidJSON(t *testing.T) {
 
 	tmpDir := t.TempDir()
 	artifactPath := filepath.Join(tmpDir, "bad.json")
-	if err := os.WriteFile(artifactPath, []byte("not json"), 0644); err != nil {
+	if err := os.WriteFile(artifactPath, []byte("not json"), 0o644); err != nil {
 		t.Fatal(err)
 	}
 
@@ -187,7 +187,7 @@ func TestPusher_Push_APIError(t *testing.T) {
 	data, _ := json.Marshal(artifact)
 	tmpDir := t.TempDir()
 	artifactPath := filepath.Join(tmpDir, "artifact.json")
-	os.WriteFile(artifactPath, data, 0644)
+	os.WriteFile(artifactPath, data, 0o644)
 
 	store := NewMemPushStore()
 	err := pusher.Push(artifactPath, store, "", "")

@@ -61,7 +61,7 @@ func (p *Pusher) Push(artifactPath string, store PushStore, jiraTicketID, jiraLi
 		return fmt.Errorf("update defects: %w", err)
 	}
 
-	return store.RecordPushed(PushedRecord{
+	return store.RecordPushed(&PushedRecord{
 		RunID:        a.RunID,
 		CaseIDs:      a.CaseIDs,
 		DefectType:   a.DefectType,
@@ -71,7 +71,7 @@ func (p *Pusher) Push(artifactPath string, store PushStore, jiraTicketID, jiraLi
 }
 
 // PushVerdict pushes an RCAVerdict to RP, converting string CaseIDs to RP int IDs.
-func (p *Pusher) PushVerdict(verdict rcatype.RCAVerdict, store PushStore) error {
+func (p *Pusher) PushVerdict(verdict *rcatype.RCAVerdict, store PushStore) error {
 	ctx := context.Background()
 	items := p.client.Project(p.project).Items()
 
@@ -93,7 +93,7 @@ func (p *Pusher) PushVerdict(verdict rcatype.RCAVerdict, store PushStore) error 
 		return fmt.Errorf("update defects: %w", err)
 	}
 
-	return store.RecordPushed(PushedRecord{
+	return store.RecordPushed(&PushedRecord{
 		RunID:        verdict.RunID,
 		CaseIDs:      verdict.CaseIDs,
 		DefectType:   verdict.DefectType,

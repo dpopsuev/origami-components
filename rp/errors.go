@@ -23,7 +23,7 @@ func (e *APIError) Error() string {
 	return fmt.Sprintf("%s: HTTP %d: %s", e.operation, e.statusCode, e.message)
 }
 
-func newAPIError(operation string, statusCode int, errorCode int, message string) *APIError {
+func newAPIError(operation string, statusCode, errorCode int, message string) *APIError {
 	return &APIError{
 		operation:  operation,
 		statusCode: statusCode,

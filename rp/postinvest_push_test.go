@@ -20,7 +20,7 @@ func TestPush_RecordsDefectTypeAndJiraInStore(t *testing.T) {
 		EvidenceRefs:      nil,
 	}
 	data, _ := json.MarshalIndent(artifact, "", "  ")
-	if err := os.WriteFile(artifactPath, data, 0644); err != nil {
+	if err := os.WriteFile(artifactPath, data, 0o644); err != nil {
 		t.Fatalf("WriteFile: %v", err)
 	}
 

@@ -42,10 +42,9 @@ func (s *ItemScope) ListAll(ctx context.Context, opts ...ListItemsOption) ([]Tes
 	pageSize := 200
 
 	for {
-		pageOpts := append(opts,
-			WithItemPageSize(pageSize),
-			WithItemPageNumber(page),
-		)
+		pageOpts := make([]ListItemsOption, len(opts), len(opts)+2)
+		copy(pageOpts, opts)
+		pageOpts = append(pageOpts, WithItemPageSize(pageSize), WithItemPageNumber(page))
 		paged, err := s.List(ctx, pageOpts...)
 		if err != nil {
 			return nil, err

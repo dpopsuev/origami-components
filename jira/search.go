@@ -27,7 +27,7 @@ func (c *Client) Search(ctx context.Context, jql string, maxResults int) ([]Issu
 	}
 	reqURL := fmt.Sprintf("%s/rest/api/2/search?%s", c.baseURL, params.Encode())
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, reqURL, nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, reqURL, http.NoBody)
 	if err != nil {
 		return nil, fmt.Errorf("jira search: create request: %w", err)
 	}

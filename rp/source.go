@@ -86,7 +86,7 @@ func NewDefectWriter(baseURL, apiKeyPath, project, submittedBy string) (rcatype.
 	return &DefectWriterRP{pusher: NewPusher(client, project, submittedBy, "")}, nil
 }
 
-func (p *DefectWriterRP) Push(verdict rcatype.RCAVerdict) (*rcatype.PushedRecord, error) {
+func (p *DefectWriterRP) Push(verdict *rcatype.RCAVerdict) (*rcatype.PushedRecord, error) {
 	st := NewMemPushStore()
 	if err := p.pusher.PushVerdict(verdict, st); err != nil {
 		return nil, err
@@ -114,7 +114,8 @@ func envelopeToRCAType(e *Envelope) *rcatype.Envelope {
 	if len(tags) > 0 {
 		env.Tags = tags
 	}
-	for _, f := range e.FailureList {
+	for i := range e.FailureList {
+		f := &e.FailureList[i]
 		ftags := map[string]string{}
 		if f.UUID != "" {
 			ftags["rp.uuid"] = f.UUID

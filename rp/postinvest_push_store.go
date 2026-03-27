@@ -11,7 +11,7 @@ type PushedRecord struct {
 
 // PushStore records pushed defect type and RCA fields (mock; no HTTP).
 type PushStore interface {
-	RecordPushed(record PushedRecord) error
+	RecordPushed(record *PushedRecord) error
 	LastPushed() *PushedRecord
 }
 
@@ -26,8 +26,8 @@ func NewMemPushStore() *MemPushStore {
 }
 
 // RecordPushed implements PushStore.
-func (s *MemPushStore) RecordPushed(record PushedRecord) error {
-	s.last = &record
+func (s *MemPushStore) RecordPushed(record *PushedRecord) error {
+	s.last = record
 	return nil
 }
 
