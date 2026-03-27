@@ -1,10 +1,10 @@
-module github.com/dpopsuev/rh-modules
+module github.com/dpopsuev/origami-components
 
 go 1.25.7
 
 require (
 	github.com/dpopsuev/origami v0.2.0
-	github.com/dpopsuev/rh-rca v0.0.0
+	github.com/dpopsuev/origami-rca v0.0.0
 )
 
 require (
@@ -17,8 +17,8 @@ require (
 	gopkg.in/yaml.v3 v3.0.1 // indirect
 )
 
-replace github.com/dpopsuev/rh-rca => /home/dpopsuev/Workspace/rh-rca
+replace github.com/dpopsuev/origami-rca => ../origami-rca
 
-replace github.com/dpopsuev/origami => /home/dpopsuev/Workspace/origami
+replace github.com/dpopsuev/origami => ../origami
 
-replace github.com/dpopsuev/bugle => /home/dpopsuev/Workspace/bugle
+replace github.com/dpopsuev/bugle => ../bugle
